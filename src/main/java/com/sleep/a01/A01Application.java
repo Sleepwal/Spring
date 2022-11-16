@@ -8,7 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.io.Resource;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Locale;
 import java.util.Map;
@@ -26,7 +28,7 @@ import java.util.Map;
 public class A01Application {
     private static final Logger LOGGER = LoggerFactory.getLogger(A01Application.class);
 
-    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException{
+    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException, IOException {
 
         ConfigurableApplicationContext context = SpringApplication.run(A01Application.class);
 
@@ -63,9 +65,26 @@ public class A01Application {
         /*
             3. ApplicationContext 比 BeanFactory 多点啥
         */
+        //① 国际化资源
         System.out.println(context.getMessage("hi", null, Locale.CHINA));
         System.out.println(context.getMessage("hi", null, Locale.ENGLISH));
         System.out.println(context.getMessage("hi", null, Locale.JAPAN));
+
+        //② 资源文件
+        Resource[] resources = context.getResources("classpath:application.properties");
+        for (Resource resource : resources) {
+            System.out.println("resource = " + resource);
+        }
+
+        Resource[] resources1 = context.getResources("classpath*:/META-INF/spring.factories");
+        for (Resource resource : resources1) {
+            System.out.println("resource = " + resource);
+        }
+
+        //③ 环境变量
+        System.out.println(context.getEnvironment().getProperty("java_home"));
+        System.out.println(context.getEnvironment().getProperty("maven_home"));
+        System.out.println(context.getEnvironment().getProperty("gradle_home"));
 
 
     }
