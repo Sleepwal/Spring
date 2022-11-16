@@ -63,14 +63,16 @@ public class A01Application {
 
 
         /*
-            3. ApplicationContext 比 BeanFactory 多点啥
+            3. ApplicationContext 比 BeanFactory 多点啥？
+
+            多了以下四个父接口的功能
         */
-        //① 国际化资源
+        //1）国际化资源
         System.out.println(context.getMessage("hi", null, Locale.CHINA));
         System.out.println(context.getMessage("hi", null, Locale.ENGLISH));
         System.out.println(context.getMessage("hi", null, Locale.JAPAN));
 
-        //② 资源文件
+        //2）资源文件
         Resource[] resources = context.getResources("classpath:application.properties");
         for (Resource resource : resources) {
             System.out.println("resource = " + resource);
@@ -81,11 +83,13 @@ public class A01Application {
             System.out.println("resource = " + resource);
         }
 
-        //③ 环境变量
+        //3）环境变量
         System.out.println(context.getEnvironment().getProperty("java_home"));
         System.out.println(context.getEnvironment().getProperty("maven_home"));
         System.out.println(context.getEnvironment().getProperty("gradle_home"));
 
+        //4）注册发布事件的类
+        context.getBean(TestComponent4.class).register();
 
     }
 }
