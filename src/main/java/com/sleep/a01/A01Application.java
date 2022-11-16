@@ -10,6 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 import java.lang.reflect.Field;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -58,6 +59,13 @@ public class A01Application {
                     System.out.println(e.getKey() + " = " + e.getValue());
                 });*/
 
+
+        /*
+            3. ApplicationContext 比 BeanFactory 多点啥
+        */
+        System.out.println(context.getMessage("hi", null, Locale.CHINA));
+        System.out.println(context.getMessage("hi", null, Locale.ENGLISH));
+        System.out.println(context.getMessage("hi", null, Locale.JAPAN));
 
 
     }
