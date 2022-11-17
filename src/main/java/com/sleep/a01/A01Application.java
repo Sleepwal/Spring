@@ -87,6 +87,8 @@ public class A01Application {
         System.out.println(context.getEnvironment().getProperty("java_home"));
         System.out.println(context.getEnvironment().getProperty("maven_home"));
         System.out.println(context.getEnvironment().getProperty("gradle_home"));
+        System.out.println(context.getEnvironment().getProperty("server.port"));
+        System.out.println(context.getEnvironment().getProperty("logging.level.com.sleep"));
 
         //4）注册发布事件的类
         context.getBean(TestComponent4.class).register();
