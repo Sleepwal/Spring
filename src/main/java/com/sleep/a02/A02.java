@@ -1,5 +1,6 @@
 package com.sleep.a02;
 
+import jdk.nashorn.internal.ir.RuntimeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -24,10 +25,10 @@ public class A02 {
     private static final Logger log = LoggerFactory.getLogger(A02.class);
 
     public static void main(String[] args) {
-        testClassPathXmlApplicationContext();
+//        testClassPathXmlApplicationContext();
 //        testFileSystemXmlApplicationContext();
 //        testAnnotationConfigApplicationContext();
-//        testAnnotationConfigServletWebServerApplicationContext();
+        testAnnotationConfigServletWebServerApplicationContext();
 
 
         /*DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
@@ -97,22 +98,22 @@ public class A02 {
 
     @Configuration
     static class WebConfig {
+        //内置Tomcat
         @Bean
-        public ServletWebServerFactory servletWebServerFactory(){
+        public ServletWebServerFactory servletWebServerFactory() {
             return new TomcatServletWebServerFactory();
         }
         @Bean
         public DispatcherServlet dispatcherServlet() {
             return new DispatcherServlet();
         }
-        @Bean
-        public DispatcherServletRegistrationBean registrationBean(DispatcherServlet dispatcherServlet) {
+        @Bean DispatcherServletRegistrationBean registrationBean(DispatcherServlet dispatcherServlet) {
             return new DispatcherServletRegistrationBean(dispatcherServlet, "/");
         }
         @Bean("/hello")
-        public Controller controller1() {
+        public Controller controller() {
             return (request, response) -> {
-                response.getWriter().print("hello");
+                response.getWriter().print("Hello World!");
                 return null;
             };
         }
