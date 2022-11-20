@@ -24,13 +24,13 @@ public class A02 {
     private static final Logger log = LoggerFactory.getLogger(A02.class);
 
     public static void main(String[] args) {
-//        testClassPathXmlApplicationContext();
+        testClassPathXmlApplicationContext();
 //        testFileSystemXmlApplicationContext();
 //        testAnnotationConfigApplicationContext();
 //        testAnnotationConfigServletWebServerApplicationContext();
 
 
-        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        /*DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
         System.out.println("读取配置文件之前-------------------------------------");
         for (String name : beanFactory.getBeanDefinitionNames()) {
             System.out.println("name = " + name);
@@ -41,7 +41,7 @@ public class A02 {
         reader.loadBeanDefinitions(new ClassPathResource("a02.xml"));
         for (String name : beanFactory.getBeanDefinitionNames()) {
             System.out.println("name = " + name);
-        }
+        }*/
 
         /*
             学到了什么
@@ -118,6 +118,7 @@ public class A02 {
         }
     }
 
+    //基于配置类来创建
     @Configuration
     static class Config {
         @Bean
