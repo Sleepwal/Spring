@@ -1,4 +1,4 @@
-package com.sleep.a01;
+package com.sleep.a01.A02;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * @package:        com.sleep.a01
  * @className:      TestBeanFactory
  * @author:     SleepWalker
- * @description:  TODO  
+ * @description:  BeanFactory和Bean后处理器
  * @date:   21:36
  * @version:    1.0
  */ 
@@ -57,6 +57,17 @@ public class TestBeanFactory {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         //获取Bean2中的Bean1
         System.out.println(beanFactory.getBean(Bean2.class).getBean1());
+
+        /*
+            学到了什么:
+            a. beanFactory 不会做的事
+                   1. 不会主动调用 BeanFactory 后处理器
+                   2. 不会主动添加 Bean 后处理器
+                   3. 不会主动初始化单例
+                   4. 不会解析beanFactory 还不会解析 ${ } 与 #{ }
+            b. bean 后处理器会有排序的逻辑
+         */
+
     }
 
 
