@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -47,6 +48,15 @@ public class TestBeanFactory {
         for (String name : beanFactory.getBeanDefinitionNames()) {
             System.out.println("name = " + name);
         }
+
+        //Bean后处理器，针对 Bean 的生命周期的各个阶段提供扩展，@Autowired @Resource
+        beanFactory.getBeansOfType(BeanPostProcessor.class).values().stream().forEach(beanFactory::addBeanPostProcessor);
+
+        //取消懒加载
+        beanFactory.preInstantiateSingletons();
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        //获取Bean2中的Bean1
+        System.out.println(beanFactory.getBean(Bean2.class).getBean1());
     }
 
 
